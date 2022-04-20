@@ -1,0 +1,20 @@
+base:
+  random_state:32
+data:
+  #loading data
+  dataset_csv: 'data/raw/iris.csv'
+  features_path: 'data/processed/featured_iris.csv'
+  trainset_path: 'data/processed/train_iris.csv'
+  testset_path: 'data/processed/train_iris.csv'
+  test_size: 0.2
+
+
+train:
+  # training hyperparams
+  clf_params:
+   'C': 0.001
+   'solver':'lbfgs'
+   'max_iter':100
+reports:
+  # metrics, images, etc
+
