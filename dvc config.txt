@@ -1,0 +1,14 @@
+dvc init
+dvc remote add -d demo-remote gdrive://1-TVBovkC43_9Hhg-kvTfIMwB3zEqENTE
+git add .
+git commit -m “Initial Push”
+git push
+
+
+
+
+
+
+#install packages
+
+pip install git+https://github.com/iterative/dvc -U --user
