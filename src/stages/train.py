@@ -4,6 +4,8 @@ import argparse
 import pandas as pd 
 from typing import Text
 import joblib
+
+print("test")
 from src.train.train import train
 
 
