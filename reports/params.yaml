@@ -10,8 +10,7 @@ data:
 
 train:
 
-  
-
+  estimator_name: svm
   clf_params:
     'C': 0.001
     'solver': 'lbfgs'
