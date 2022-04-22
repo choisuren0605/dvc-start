@@ -5,7 +5,6 @@ import pandas as pd
 from typing import Text
 import joblib
 import os
-print("test")
 from matplotlib.pyplot import text
 from numpy import average
 import pandas as pd
@@ -72,7 +71,7 @@ def train_model(config_path:Text)->None:
                 param_grid=config['train']['estimators'][estimator_name]['param_grid'],
                 cv=config['train']['cv']
                 )
-
+    print(model.best_score_)
     model_name = config['base']['model']['model_name']
     models_folder = config['base']['model']['models_folder']
 
