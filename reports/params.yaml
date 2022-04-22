@@ -54,7 +54,7 @@ data:
   dataset_csv: 'data/raw/iris.csv'
   features_path: 'data/processed/featured_iris.csv'
   trainset_path: 'data/processed/train_iris.csv'
-  testset_path: 'data/processed/train_iris.csv'
+  testset_path: 'data/processed/test_iris.csv'
   test_size: 0.2
 
 evaluate:

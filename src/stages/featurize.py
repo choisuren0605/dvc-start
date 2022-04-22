@@ -9,7 +9,7 @@ def featurize(config_path: Text)->None:
     with open ("reports/params.yaml") as conf_file:
         config=yaml.safe_load(conf_file)
     
-    dataset=pd.read_csv(config["data_load"]["dataset_csv"])
+    dataset=pd.read_csv(config["data"]["dataset_csv"])
     dataset['sepal_length_to_sepal_width'] = dataset['sepal_length'] / dataset['sepal_width']
     dataset['petal_length_to_petal_width'] = dataset['petal_length'] / dataset['petal_width']
 
@@ -18,9 +18,9 @@ def featurize(config_path: Text)->None:
     'sepal_length_to_sepal_width', 'petal_length_to_petal_width',
     'target']]
 
-    features_path=config['featurize']['features_path']
+    features_path=config['featurize']['featured_dataset_csv']
     featured_dataset.to_csv(features_path, index=False)
-
+    print("Featurize complete")
 
 if __name__=='__main__':
     args_parser=argparse.ArgumentParser()
