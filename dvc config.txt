@@ -12,3 +12,27 @@ git push
 #install packages
 
 pip install git+https://github.com/iterative/dvc -U --user
+
+2.Get data
+###########################################################
+%%bash
+dvc stage add -n data_load \
+        -d src/stages/data_load.py \
+        -o data/raw/iris.csv \
+        -p base,data_load \
+        python src/stages/data_load.py --config=params.yaml
+        
+        
+2.Featurization        
+###########################################################
+%%bash
+dvc stage add -n featurize \
+        -d src/stages/featurize.py \
+        -d data/raw/iris.csv \
+        -o data/processed/featured_iris.csv\
+        -p base,featurize \
+        python src/stages/featurize.py --config=params.yaml'
+        
+3.Data split       
+###########################################################
+        
