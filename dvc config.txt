@@ -1,3 +1,4 @@
+dvc==1.8.4
 dvc init
 dvc remote add -d demo-remote gdrive://1-TVBovkC43_9Hhg-kvTfIMwB3zEqENTE
 git add .
