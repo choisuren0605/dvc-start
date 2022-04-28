@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 
 def data_split(config_path: Text)->None:
-    with open ("reports/params.yaml") as conf_file:
+    with open ("params.yaml") as conf_file:
         config=yaml.safe_load(conf_file)
     
     dataset=pd.read_csv(config['featurize']['dataset_csv'])

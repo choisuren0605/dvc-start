@@ -6,7 +6,7 @@ import yaml
 
 
 def featurize(config_path: Text)->None:
-    with open ("reports/params.yaml") as conf_file:
+    with open ("params.yaml") as conf_file:
         config=yaml.safe_load(conf_file)
     
     dataset=pd.read_csv(config["data"]["dataset_csv"])

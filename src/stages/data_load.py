@@ -5,7 +5,7 @@ from sklearn.datasets import load_iris
 import yaml
 
 def data_load(config_path:Text)->None:
-    with open ("reports/params.yaml") as conf_file:
+    with open ("params.yaml") as conf_file:
         config=yaml.safe_load(conf_file)
     data = load_iris(as_frame=True)
     dataset = data.frame

@@ -40,7 +40,7 @@ def evaluate(df: pd.DataFrame, target_column: Text, clf: sklearn.base.BaseEstima
 def evaluate_model(config_path: Text):
 
 
-    with open ("reports/params.yaml") as conf_file:
+    with open ("params.yaml") as conf_file:
         config=yaml.safe_load(conf_file)
 
     target_column = config['featurize']['target_column']

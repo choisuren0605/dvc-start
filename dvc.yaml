@@ -1,0 +1,54 @@
+stages:
+  data_load:
+    cmd: python src/stages/data_load.py --config=params.yaml
+    deps:
+    - src/stages/data_load.py
+    params:
+    - data
+    outs:
+    - data/raw/iris.csv
+
+  featurize:
+    cmd: python src/stages/featurize.py --config=params.yaml
+    deps:
+    - data/raw/iris.csv
+    - src/stages/featurize.py
+    params:
+    - featurize
+    outs:
+    - data/interim/featured_iris.csv
+
+  data_split:
+    cmd: python src/stages/data_split.py --config=params.yaml
+    deps:
+    - data/interim/featured_iris.csv
+    - src/stages/data_split.py
+    params:
+    - split_train_test
+    - featurize
+    outs:
+    - data/processed/train_iris.csv
+    - data/processed/test_iris.csv
+  
+  train:
+    cmd: python src/stages/train.py --config=params.yaml
+    deps:
+    - data/processed/train_iris.csv
+    - src/stages/train.py
+    params:
+    - train
+    - base
+    outs:
+    - models/model.joblib
+  evalute:
+    cmd: python src/stages/evalute.py --config=params.yaml
+    deps:
+    - data/processed/test_iris.csv
+    - src/stages/evalute.py
+    - models/model.joblib
+    params:
+    - evaluate
+    outs:
+    - experiments/eval.txt
+
+

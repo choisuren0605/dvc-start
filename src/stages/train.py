@@ -60,7 +60,7 @@ def train(df: pd.DataFrame, target_column: Text, estimator_name: Text, param_gri
 
 
 def train_model(config_path:Text)->None:
-    with open ("reports/params.yaml") as conf_file:
+    with open ("params.yaml") as conf_file:
         config=yaml.safe_load(conf_file)
 
     estimator_name=config['train']['estimator_name']
