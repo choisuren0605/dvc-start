@@ -16,13 +16,13 @@ split_train_test:
   folder: experiments
   train_csv: data/processed/train_iris.csv
   test_csv: data/processed/test_iris.csv
-  test_size: 0.2
+  test_size: 0.3
 
 
 featurize:
   dataset_csv: data/raw/iris.csv
   featured_dataset_csv: data/interim/featured_iris.csv
-  features_columns_range: ['sepal_length', 'petal_length_to_petal_width']
+  features_columns_range: [sepal_length, petal_length_to_petal_width]
   target_column: target
 
 
@@ -34,14 +34,14 @@ train:
       param_grid: # params of GridSearchCV constructor
         C: [0.001, 0.01]
         max_iter: [100]
-        solver: ['lbfgs']
-        multi_class: ['multinomial']
+        solver: [lbfgs]
+        multi_class: [multinomial]
 
     svm: # sklearn.svm.SVC
       param_grid:
         C: [0.1, 1.0]
-        kernel: ["rbf", "linear"]
-        gamma: ["scale"]
+        kernel: [rbf, linear]
+        gamma: [scale]
         degree: [3, 5]
 #
 #    knn: # sklearn.neighbors.KNeighborsClassifier
@@ -51,10 +51,10 @@ train:
 #
 data:
   #loading data
-  dataset_csv: 'data/raw/iris.csv'
-  features_path: 'data/processed/featured_iris.csv'
-  trainset_path: 'data/processed/train_iris.csv'
-  testset_path: 'data/processed/test_iris.csv'
+  dataset_csv: data/raw/iris.csv
+  features_path: data/processed/featured_iris.csv
+  trainset_path: data/processed/train_iris.csv
+  testset_path: data/processed/test_iris.csv
   test_size: 0.2
 
 evaluate:
