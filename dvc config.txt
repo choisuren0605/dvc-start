@@ -41,13 +41,8 @@ dvc.yaml
 stages:
   data_load:
     cmd: python src/stages/data_load.py --config=params.yaml
-    
     deps:
-      -src/stages/data_load.py
-    params:
-      -base
-      -data_load
-    outs:
-      -data/raw/iris.csv
+    - src/stages/data_load.py
+   
 
         
