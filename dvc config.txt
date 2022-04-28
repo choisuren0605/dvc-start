@@ -53,6 +53,6 @@ stages:
     - featurize
     outs:
     - data/processed/featured_iris.csv
-  
-
         
+#################################################################
+git rm -r --cached 'data\raw\iris.csv'
