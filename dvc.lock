@@ -1,0 +1,129 @@
+data_load:
+  cmd: python src/stages/data_load.py --config=params.yaml
+  deps:
+  - path: src/stages/data_load.py
+    md5: db5be1fc64d5a56766b0a80fd359d273
+  params:
+    params.yaml:
+      data:
+        dataset_csv: data/raw/iris.csv
+        features_path: data/processed/featured_iris.csv
+        trainset_path: data/processed/train_iris.csv
+        testset_path: data/processed/test_iris.csv
+        test_size: 0.2
+  outs:
+  - path: data/raw/iris.csv
+    md5: 4224576f0267bf88902f87f0f6200967
+featurize:
+  cmd: python src/stages/featurize.py --config=params.yaml
+  deps:
+  - path: data/raw/iris.csv
+    md5: 4224576f0267bf88902f87f0f6200967
+  - path: src/stages/featurize.py
+    md5: 150afedaf17f02586c314099c8644965
+  params:
+    params.yaml:
+      featurize:
+        dataset_csv: data/raw/iris.csv
+        featured_dataset_csv: data/interim/featured_iris.csv
+        features_columns_range:
+        - sepal_length
+        - petal_length_to_petal_width
+        target_column: target
+  outs:
+  - path: data/interim/featured_iris.csv
+    md5: 5d03a1564b3038fc35a842f8e4bde491
+data_split:
+  cmd: python src/stages/data_split.py --config=params.yaml
+  deps:
+  - path: data/interim/featured_iris.csv
+    md5: 5d03a1564b3038fc35a842f8e4bde491
+  - path: src/stages/data_split.py
+    md5: b13c8ffc458d94b3d02864a419987381
+  params:
+    params.yaml:
+      featurize:
+        dataset_csv: data/raw/iris.csv
+        featured_dataset_csv: data/interim/featured_iris.csv
+        features_columns_range:
+        - sepal_length
+        - petal_length_to_petal_width
+        target_column: target
+      split_train_test:
+        folder: experiments
+        train_csv: data/processed/train_iris.csv
+        test_csv: data/processed/test_iris.csv
+        test_size: 0.2
+  outs:
+  - path: data/processed/test_iris.csv
+    md5: 267bfa51ad9743b43b712d57b227f629
+  - path: data/processed/train_iris.csv
+    md5: 62ad220902012b3562015caf7c38f7e7
+train:
+  cmd: python src/stages/train.py --config=params.yaml
+  deps:
+  - path: data/processed/train_iris.csv
+    md5: 62ad220902012b3562015caf7c38f7e7
+  - path: src/stages/train.py
+    md5: e65d2a3cec8ac357e184af8cf020b5d0
+  params:
+    params.yaml:
+      base:
+        project: 7labs/dvc-2-iris-demo
+        name: iris
+        tags:
+        - solution-0-prototype
+        - dev
+        model:
+          model_name: model.joblib
+          models_folder: models
+        experiments:
+          experiments_folder: experiments
+        random_state: 42
+      train:
+        cv: 5
+        estimator_name: svm
+        estimators:
+          logreg:
+            param_grid:
+              C:
+              - 0.001
+              - 0.01
+              max_iter:
+              - 100
+              solver:
+              - lbfgs
+              multi_class:
+              - multinomial
+          svm:
+            param_grid:
+              C:
+              - 0.1
+              - 1.0
+              kernel:
+              - rbf
+              - linear
+              gamma:
+              - scale
+              degree:
+              - 3
+              - 5
+  outs:
+  - path: models/model.joblib
+    md5: 524c31e4cdabaa539a4ce0184076481e
+evalute:
+  cmd: python src/stages/evalute.py --config=params.yaml
+  deps:
+  - path: data/processed/test_iris.csv
+    md5: 267bfa51ad9743b43b712d57b227f629
+  - path: models/model.joblib
+    md5: 524c31e4cdabaa539a4ce0184076481e
+  - path: src/stages/evalute.py
+    md5: 06030ea64b8a50b33691eefaf6594fc4
+  params:
+    params.yaml:
+      evaluate:
+        metrics_file: eval.txt
+  outs:
+  - path: experiments/eval.txt
+    md5: bab0dc3bdbf2ef11a025b8d02fbef417
