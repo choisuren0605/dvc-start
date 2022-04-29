@@ -13,6 +13,9 @@ import pandas as pd
 import sklearn.base
 from sklearn.metrics import confusion_matrix, f1_score
 from typing import Text, Tuple
+import matplotlib.pyplot as plt
+import itertools
+import seaborn as sns
 
 
 def get_dataset(dataset_path: Text) -> pd.DataFrame:
@@ -65,6 +68,10 @@ def evaluate_model(config_path: Text):
     metrics={'f1':f1}
     with open(config["evaluate"]["metrics"],'w') as mf:
         json.dump(obj=metrics,fp=mf,indent=4)
+
+    plt=sns.heatmap(cm, square=True, annot=True, cmap='Blues', fmt='d', cbar=False)
+    plt.figure.savefig(config["evaluate"]["confusion_matrix"])
+    
 
 if __name__ == '__main__':
     args_parser = argparse.ArgumentParser()

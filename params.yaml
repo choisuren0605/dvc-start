@@ -60,5 +60,7 @@ data:
 evaluate:
   metrics_file: reports/eval.txt
   metrics: reports/metrics.json
+  confusion_matrix: reports/confusion_matrix.png
+
 
 

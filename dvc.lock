@@ -119,13 +119,16 @@ evalute:
   - path: models/model.joblib
     md5: 097032854ad2785e9a696890f4918def
   - path: src/stages/evalute.py
-    md5: e4125642d4cf324d2ae3cfc1fefc8504
+    md5: 4a4cb1d1afeb5746621631d4a99f738c
   params:
     params.yaml:
       evaluate:
         metrics_file: reports/eval.txt
         metrics: reports/metrics.json
+        confusion_matrix: reports/confusion_matrix.png
   outs:
+  - path: reports/confusion_matrix.png
+    md5: 20b95277418aee060d241c892e5775e5
   - path: reports/eval.txt
     md5: bab0dc3bdbf2ef11a025b8d02fbef417
   - path: reports/metrics.json

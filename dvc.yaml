@@ -51,5 +51,6 @@ stages:
     outs:
     - reports/eval.txt
     - reports/metrics.json
+    - reports/confusion_matrix.png
 
 
