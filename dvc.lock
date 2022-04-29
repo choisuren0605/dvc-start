@@ -81,16 +81,15 @@ train:
           experiments_folder: experiments
         random_state: 42
       train:
-        cv: 5
+        cv: 3
         estimator_name: svm
         estimators:
           logreg:
             param_grid:
               C:
-              - 0.001
-              - 0.01
+              - 0.1
               max_iter:
-              - 100
+              - 3
               solver:
               - lbfgs
               multi_class:
@@ -110,14 +109,14 @@ train:
               - 5
   outs:
   - path: models/model.joblib
-    md5: 097032854ad2785e9a696890f4918def
+    md5: 70225922d10a9e14b6aaee0fc45ef925
 evalute:
   cmd: python src/stages/evalute.py --config=params.yaml
   deps:
   - path: data/processed/test_iris.csv
     md5: 267bfa51ad9743b43b712d57b227f629
   - path: models/model.joblib
-    md5: 097032854ad2785e9a696890f4918def
+    md5: 70225922d10a9e14b6aaee0fc45ef925
   - path: src/stages/evalute.py
     md5: 4a4cb1d1afeb5746621631d4a99f738c
   params:
