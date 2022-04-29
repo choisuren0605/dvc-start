@@ -110,20 +110,23 @@ train:
               - 5
   outs:
   - path: models/model.joblib
-    md5: 524c31e4cdabaa539a4ce0184076481e
+    md5: 097032854ad2785e9a696890f4918def
 evalute:
   cmd: python src/stages/evalute.py --config=params.yaml
   deps:
   - path: data/processed/test_iris.csv
     md5: 267bfa51ad9743b43b712d57b227f629
   - path: models/model.joblib
-    md5: 524c31e4cdabaa539a4ce0184076481e
+    md5: 097032854ad2785e9a696890f4918def
   - path: src/stages/evalute.py
-    md5: 06030ea64b8a50b33691eefaf6594fc4
+    md5: e4125642d4cf324d2ae3cfc1fefc8504
   params:
     params.yaml:
       evaluate:
-        metrics_file: eval.txt
+        metrics_file: reports/eval.txt
+        metrics: reports/metrics.json
   outs:
-  - path: experiments/eval.txt
+  - path: reports/eval.txt
     md5: bab0dc3bdbf2ef11a025b8d02fbef417
+  - path: reports/metrics.json
+    md5: 4d9d1f9a7ac4184659b5833093abe456

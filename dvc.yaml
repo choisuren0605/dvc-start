@@ -49,6 +49,7 @@ stages:
     params:
     - evaluate
     outs:
-    - experiments/eval.txt
+    - reports/eval.txt
+    - reports/metrics.json
 
 

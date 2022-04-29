@@ -36,7 +36,6 @@ def evaluate(df: pd.DataFrame, target_column: Text, clf: sklearn.base.BaseEstima
 
 
 
-
 def evaluate_model(config_path: Text):
 
 
@@ -59,10 +58,13 @@ def evaluate_model(config_path: Text):
         'confusion_matrix': cm.tolist()
     }
     print(test_report)
-    filepath = os.path.join(config['base']['experiments']['experiments_folder'],
-                            config['evaluate']['metrics_file'])
+    filepath = config['evaluate']['metrics_file']
     json.dump(obj=test_report, fp=open(filepath, 'w'), indent=2)
     print("complete evalution")
+
+    metrics={'f1':f1}
+    with open(config["evaluate"]["metrics"],'w') as mf:
+        json.dump(obj=metrics,fp=mf,indent=4)
 
 if __name__ == '__main__':
     args_parser = argparse.ArgumentParser()
